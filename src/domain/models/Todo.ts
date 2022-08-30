@@ -1,12 +1,24 @@
-export interface ITask {
+export interface ITodo {
   id: number;
-  task: string;
+  text: string;
   isDone?: boolean;
 }
 
-// Use Cases
-export interface ITaskOperations {
-  addTask: () => ITask[];
-  removeTask: (task: ITask) => ITask;
-  getTasks: () => ITask[];
+// Or With Class
+export class Todo {
+  id: number | null = null;
+  isDone?: boolean = false;
+
+  constructor(private text: string = '') {
+    if(!text) {
+      throw 'Todo Text Must Contain Value!'
+    }
+  }
 }
+
+// // Use Cases
+// export interface ITaskOperations {
+//   addTask: () => ITask[];
+//   removeTask: (task: ITask) => ITask;
+//   getTasks: () => ITask[];
+// }
