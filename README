@@ -1,0 +1,14 @@
+Puprpose:
+- Todo Application Based on Hexegonal arichtcture (Ports and Adapter)
+- https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/?utm_source=pocket_mylist
+
+Use Cases:
+- show all todos
+- add Todo
+- complete todo
+
+capabilities:
+1. save todos inMemory
+2. save toods in Session Storage
+3. save toods in Local Storage
+4. save todos in Server
