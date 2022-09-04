@@ -2,13 +2,127 @@ Puprpose:
 - Todo Application Based on Hexegonal arichtcture (Ports and Adapter)
 - https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/?utm_source=pocket_mylist
 
-Use Cases:
-- show all todos
-- add Todo
-- complete todo
+--------------------------------
+-- App (inner circle - Business Logic) --
+models:
+- entities:
+    - Todo
+        - id
+        - text
+        - isComplete (???)
+    - TodoList (???)
+        - id
+        - list - Todo[]
+        - count/size
 
+limitation/validation:
+- todo must have at least 5 chars and not more than 150 chars
+
+Use Cases: (CRUD)
+- get all todos -> TodoList
+- insert Todo
+- delete todo
+
+Port (TodoRepository)
+- interface
+    - get all todos
+    - insert Todo
+    - delete todo
+--------------------------------
+Adapters (primary(input) and secondary(output)):
+-?????????? (talk with shiri about services)
+
+
+PrimarySessionStorageAdapter
+
+
+
+SecondarySessionStorageAdapter implement TodoRepository
+    /////// comment: constructor(todoRepoService: TodoRepository/TodoPort) ??? optional
+    - get all todos
+    - insert Todo(text)
+        - createTodoUseCase(text)
+        - sessionStorage.set('item', text)
+    - delete todo(id)
+
+
+SecondarySessionStorageAdapterLocalStorageAdapter implement TodoRepository
+    - get all todos
+    - insert Todo(todoDto)
+    - delete todo(id)
+
+SecondarySessionStorageAdapterHTTPAdapter implement TodoRepository
+    - constructor(HTTPClient) [HTTPClient -> axios/fetch] implement HTTP interface
+    - get all todos
+    - insert Todo(todoDto)
+    - delete todo(id)
+--------------------------------
+Infrastructure:
+- ui
+ - react
+     - TodoPage (smart component)
+            - constructor
+                - WebPageAdapter
+                    - instance uiPort(todoText)
+                        - conversion to next layer (if needed)
+
+                    - use case: (DI - specific secondary port)
+                        - createTodoUseCase(text)
+                            - validation
+                            - call to other secondary port
+                    - secondary port
+                        - call to specific adapter to save todo
+                            - for example: sessionStroageSecondaryAdapter
+                    - sessionStroageSecondaryAdapter
+                        - implements the session storage window api
+                            - for example: sessionStorage.set('todo', 'text')
+
+
+
+
+                or
+                - todoService -> new SessionStorageAdapter();
+                or
+                - todoService -> new HTTPAdapter(new HttpAxios);
+            - init
+                - todoService.getTodos() [see below]
+            - TodoListComponent
+                - TodoComponent
+ - angular
+    - TodoPage (smart component)
+        - constructor
+            - todoService -> new LocalStorageAdapter();
+                            - something nice:
+                                - you can use Angular DI (with or without Factory)
+                                    - need to check the original Factory Method (old switch)
+            or
+            - todoService -> new SessionStorageAdapter();
+            or
+            - todoService -> new HTTPAdapter(new HttpAxios);
+        - init
+            - todoService.getTodos() [see below]
+        - TodoListComponent
+            - TodoComponent
+        - Add Todo
+            - todoService.insertTodo(TodoRequestDTO) [see below]
+
+-- TodoService implements TodoRepository --
+ constructor(todoRepository: TodoRepository)
+ - get all todos
+    - todoRepository.getTodos();
+ - insert Todo
+    - todoRepository.insertTodo(todo);
+ - delete todo
+    - todoRepository.deleteTodo(id);
+
+--------------------------------
 capabilities:
 1. save todos inMemory
-2. save toods in Session Storage
-3. save toods in Local Storage
-4. save todos in Server
+2. save todos in Session Storage
+3. save todos in Local Storage
+4. save todos in Server (HTTP)
+
+
+
+infrastructure == actors
+- actors is more self explanatory

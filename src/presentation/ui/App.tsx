@@ -1,6 +1,6 @@
 import { FC, ChangeEvent, useState, useRef } from "react";
-import TasksList from "./TasksList";
-import Task from "./TaskItem";
+import TasksList from "./components/TasksList";
+import Task from "./components/TaskItem";
 import { ITask } from "./Interfaces";
 import "./styles.css";
 

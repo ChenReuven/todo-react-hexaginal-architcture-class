@@ -26,7 +26,7 @@ const AxiosTodoRepositoryFunc = (): ITodoRepository => ({
     addTodo: (todo: ITodo)=> {
         axios.post('./todo', todo).then(r => r);
     },
-    removeTodo: (id: string) =>{
+    removeTodo: (id: string) => {
         axios.delete(`/todo/${id}`).then(r=>r);
     }
 })

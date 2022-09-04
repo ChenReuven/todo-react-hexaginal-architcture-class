@@ -1,7 +1,7 @@
 // use cases
-import {ITodo} from "../models/Todo";
+import {ITodo} from "../../models/Todo";
 
-export interface ITodoRepository {
+export interface ITodoOperationPrimary {
     addTodo: (todo: ITodo) => void;
     removeTodo: (id: string) => void;
     getAllTodos: () => ITodo[] | Promise<ITodo[]>;
