@@ -1,8 +1,9 @@
 // use cases
-import {ITodo} from "../../models/Todo";
+import {ITodoDtoRequest} from "../../../adapters/services/dtos/todoDtoRequest";
+import {ITodoDtoResponse} from "../../../adapters/services/dtos/todoDtoResponse";
 
 export interface ITodoOperationSecondary {
-    addTodo: (todo: ITodo) => void;
+    addTodo: (todo: ITodoDtoRequest) => void;
     removeTodo: (id: string) => void;
-    getAllTodos: () => ITodo[] | Promise<ITodo[]>;
+    getAllTodos: () => Promise<ITodoDtoResponse[]>;
 }

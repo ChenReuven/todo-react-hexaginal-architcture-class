@@ -1,10 +1,10 @@
 // Implementation: class
-import {ITodoRepository} from "../../domain/ports/TodoRepository";
 import axios from "axios";
 import {ITodo} from "../../domain/models/Todo";
+import {ITodoOperationSecondary} from "../../domain/ports/secondary/ITodoOperarationsSecondary";
 
 // Note: instead of call directly to Axios 3rd party, we can create an AxiosHttpService
-class AxiosTodoRepository implements ITodoRepository {
+/*class AxiosTodoRepository implements ITodoOperationSecondary {
     addTodo(todo: ITodo): void {
         axios.post('./todo', todo).then(r => r);
     }
@@ -16,10 +16,10 @@ class AxiosTodoRepository implements ITodoRepository {
     removeTodo(id: string): void {
         axios.delete(`/todo/${id}`).then(r => r)
     }
-}
+}*/
 
 // Implementation: function
-const AxiosTodoRepositoryFunc = (): ITodoRepository => ({
+/*const AxiosTodoRepositoryFunc = (): ITodoRepository => ({
     getAllTodos: (): Promise<ITodo[]> => {
         return axios.get('/todo');
     },
@@ -29,4 +29,4 @@ const AxiosTodoRepositoryFunc = (): ITodoRepository => ({
     removeTodo: (id: string) => {
         axios.delete(`/todo/${id}`).then(r=>r);
     }
-})
+})*/
