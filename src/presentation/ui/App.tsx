@@ -42,7 +42,7 @@ const App: FC = (): JSX.Element => {
     //   isDone: false
     // };
     // setTodoList((prevState: ITask[]): ITask[] => [...prevState, newTask]);
-    // clearInputs();
+    clearInputs();
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
