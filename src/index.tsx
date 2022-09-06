@@ -1,6 +1,3 @@
-import { render } from "react-dom";
+import {bootstrap} from "./presentation/ui/bootstrap";
 
-import App from "./presentation/ui/App";
-
-const rootElement = document.getElementById("root");
-render(<App />, rootElement);
+bootstrap();
