@@ -5,6 +5,7 @@ import {TodoInMemoryService} from "../in-memory/todo-in-memory";
 
 export class ImMemoryDataAccessImplementation implements ITodoOperationSecondary {
   addTodo(todo: ITodoDtoRequest): void {
+    // optional: convert TODO to secondary request TODO
     TodoInMemoryService.addTodo(todo);
   }
 
